@@ -14,10 +14,83 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
 
-
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    
+    importJSONdataIfNeeded()
+    
+    guard let _ = window?.rootViewController as? TabBarController else {
+      return true
+    }
+    
+    TabBarController.managedContext = persistentContainer.viewContext
+    
     return true
+  }
+  
+  private func importJSONdataIfNeeded() {
+    
+    let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
+    let count = try! persistentContainer.viewContext.count(for: fetchRequest)
+    
+    guard count == 0 else { return }
+    
+    // populate Core Data model with sample Recipe from .json file
+    
+    let jsonURL = Bundle.main.url(forResource: "seed", withExtension: "json")
+    let jsonData = try! Data(contentsOf: jsonURL!)
+    
+    let jsonContent = try! JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+    let recipeDict = jsonContent["recipe"] as! [String: Any]
+    
+    // parse Category
+    let categoryDict = recipeDict["category"] as! [String: Any]
+    let categoryName = categoryDict["name"] as! String
+    let categoryCount = categoryDict["numberOfRecipes"] as! Int16
+    
+    // parse recipe attributes
+    let title = recipeDict["title"] as! String
+    let time = recipeDict["time"] as! Int16
+    let details = recipeDict["details"] as! String
+    
+    // parse Title Image
+    let imageName = recipeDict["image"] as! String
+    let image = UIImage(named: imageName)!
+    let imageData = image.pngData()! as NSData
+    
+    let category = Category(context: persistentContainer.viewContext)
+    category.name = categoryName
+    category.numberOfRecipes = categoryCount
+    
+    let recipe = Recipe(context: persistentContainer.viewContext)
+    recipe.category = category
+    recipe.title = title
+    recipe.time = time
+    recipe.details = details
+    recipe.image = imageData
+    
+    let ingridientsArray = recipeDict["ingridients"] as! [String]
+    
+    for ingridientString in ingridientsArray {
+      let ingridient = Ingridient(context: persistentContainer.viewContext)
+      ingridient.details = ingridientString
+      recipe.addToIngridients(ingridient)
+    }
+    
+    let stepsArray = recipeDict["steps"] as! [[String: String]]
+    
+    for stringDict in stepsArray {
+      let step = Step(context: persistentContainer.viewContext)
+      step.details = stringDict["details"]
+      let imageString = stringDict["photo"]
+      let image = UIImage(named: imageString!)!
+      let imageData = image.pngData()! as NSData
+      step.image = imageData
+      recipe.addToSteps(step)
+    }
+    
+    category.addToRecipes(recipe)
+    
+    saveContext()
   }
 
   func applicationWillResignActive(_ application: UIApplication) {

@@ -1,0 +1,48 @@
+{
+  "recipe": {
+    "category": {
+      "name": "Sample Category",
+      "numberOfRecipes": 1
+    },
+    "title": "Chicory salad with apples",
+    "time": 15,
+    "details": "One of the secrets is you need to use a lot of dressing for this salad. Spread dressing in time steps. Cheese should be piquant.",
+    "image": "titleImage",
+    "ingridients": [
+      "1.5 medium chicory salads",
+      "5g of blue cheese",
+      "1/3 green apple",
+      "1.5 lemon",
+      "3 tbs olive oil",
+      "1 tbs of mustard",
+      "1 tsp of agave syrup",
+      "1 pinch of salt"
+    ],
+    "steps": [
+      {
+        "details": "Get the juice from one the lemon.",
+        "photo": "image1"
+      },
+      {
+        "details": "Prepare dressing: mix mustart with lemon juice, olive oil, agave syrup and salt. Mix.",
+        "photo": "image2"
+      },
+      {
+        "details": "Cut chicory salad by long side in 4 pieces. Put it on a plate and add dressing.",
+        "photo": "image3"
+      },
+      {
+        "details": "Get the juice from remaining 0.5 lemon.",
+        "photo": "image4"
+      },
+      {
+        "details": "Cut the apple to a small pieces. Pour with lemon juice and place apples on top on chicory salad.",
+        "photo": "image5"
+      },
+      {
+        "details": "Cut the blue cheese to a small pieces and add to them to salad.",
+        "photo": "image6"
+      }
+    ]
+  }
+}
