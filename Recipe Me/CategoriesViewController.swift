@@ -13,12 +13,15 @@ class CategoriesViewController: UIViewController {
   
   let categoryCellIdentifier = "CategoryCell"
   let numbersOfItemsInRow = 2
+  let segueIdentifier = "toRecipes"
   
   @IBOutlet weak var collectionView: UICollectionView!
   
   var fetchResultsController: NSFetchedResultsController<Category>!
   var managedContext: NSManagedObjectContext!
-
+  
+  
+  // MARK: - Lifecycle
     override func viewDidLoad() {
       super.viewDidLoad()
       
@@ -34,20 +37,20 @@ class CategoriesViewController: UIViewController {
       } catch {
         print("\(error.localizedDescription)")
       }
-    }
+  }
   
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
+  // MARK: - Segue
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    guard segue.identifier == segueIdentifier else { return }
+    
+    let destinationVC = segue.destination as! RecipesViewController
+    let selectedIndex = collectionView.indexPathsForSelectedItems!.first!
+    destinationVC.category = fetchResultsController.fetchedObjects?[selectedIndex.row].name!
+  }
 }
 
+// MARK: - UICollectionViewDataSource
 extension CategoriesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return fetchResultsController.fetchedObjects?.count ?? 0
@@ -66,6 +69,7 @@ extension CategoriesViewController: UICollectionViewDataSource {
   }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
@@ -76,5 +80,12 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
       + (flowLayout.minimumInteritemSpacing * CGFloat(numbersOfItemsInRow - 1))
     let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numbersOfItemsInRow))
     return CGSize(width: size, height: size)
+  }
+}
+
+// MARK: - UICollectionViewDelegate
+extension CategoriesViewController: UICollectionViewDelegate {
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    performSegue(withIdentifier: segueIdentifier, sender: collectionView)
   }
 }
