@@ -7,6 +7,7 @@
     </entity>
     <entity name="Ingridient" representedClassName="Ingridient" syncable="YES">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isPresent" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="recipe" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Recipe" inverseName="ingridients" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <entity name="Recipe" representedClassName="Recipe" syncable="YES">
@@ -25,8 +26,8 @@
     </entity>
     <elements>
         <element name="Category" positionX="-470.67578125" positionY="-193.27734375" width="128" height="88"/>
+        <element name="Ingridient" positionX="-459.86328125" positionY="188.4765625" width="128" height="90"/>
         <element name="Recipe" positionX="-222.88671875" positionY="6.75" width="128" height="148"/>
-        <element name="Ingridient" positionX="-459.86328125" positionY="188.4765625" width="128" height="73"/>
         <element name="Step" positionX="-440.640625" positionY="312.3203125" width="128" height="88"/>
     </elements>
 </model>

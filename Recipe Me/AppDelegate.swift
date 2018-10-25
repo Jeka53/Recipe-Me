@@ -68,11 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     recipe.details = details
     recipe.image = imageData
     
-    let ingridientsArray = recipeDict["ingridients"] as! [String]
+    let ingridientsArray = recipeDict["ingridients"] as! [[String: Any]]
     
-    for ingridientString in ingridientsArray {
+    for ingridientDict in ingridientsArray {
       let ingridient = Ingridient(context: persistentContainer.viewContext)
-      ingridient.details = ingridientString
+      ingridient.details = ingridientDict["details"] as? String
+      ingridient.isPresent = ingridientDict["isPresent"] as! Bool
       recipe.addToIngridients(ingridient)
     }
     

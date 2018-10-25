@@ -14,10 +14,22 @@ class StepTableViewCell: UITableViewCell {
   @IBOutlet weak var stepImageView: UIImageView!
   @IBOutlet weak var stepLabel: UILabel!
   
+  @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+  
   override func awakeFromNib() {
     super.awakeFromNib()
     
+    heightConstraint.constant = 0
+    stepNumber.text = nil
     stepImageView.image = nil
     stepLabel.text = nil
+  }
+  
+  func setImage(image: UIImage?) {
+    
+    guard image != nil else { return }
+    
+    heightConstraint.constant = image!.size.height
+    stepImageView.image = image
   }
 }

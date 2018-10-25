@@ -9,18 +9,42 @@
     "details": "One of the secrets is you need to use a lot of dressing for this salad. Spread dressing in time steps. Cheese should be piquant.",
     "image": "titleImage",
     "ingridients": [
-      "1.5 medium chicory salads",
-      "5g of blue cheese",
-      "1/3 green apple",
-      "1.5 lemon",
-      "3 tbs olive oil",
-      "1 tbs of mustard",
-      "1 tsp of agave syrup",
-      "1 pinch of salt"
+      {
+        "details": "1.5 medium chicory salads",
+        "isPresent": false
+      },
+      {
+       "details": "5g of blue cheese",
+       "isPresent": false
+      },
+      {
+       "details": "1/3 green apple",
+       "isPresent": false
+      },
+      {
+      "details": "1.5 lemon",
+      "isPresent": false
+      },
+      {
+      "details": "3 tbs olive oil",
+      "isPresent": false
+      },
+      {
+      "details": "1 tbs of mustard",
+      "isPresent": true
+      },
+      {
+      "details": "1 tsp of agave syrup",
+      "isPresent": false
+      },
+      {
+      "details": "1 pinch of salt",
+      "isPresent": false
+      }
     ],
     "steps": [
       {
-        "details": "Get the juice from one the lemon.",
+        "details": "Get the juice from one lemon.",
         "photo": "image1"
       },
       {

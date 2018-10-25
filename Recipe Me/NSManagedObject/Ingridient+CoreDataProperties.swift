@@ -2,7 +2,7 @@
 //  Ingridient+CoreDataProperties.swift
 //  Recipe Me
 //
-//  Created by Jora on 10/18/18.
+//  Created by Jora on 10/24/18.
 //  Copyright © 2018 Jora. All rights reserved.
 //
 //
@@ -18,6 +18,7 @@ extension Ingridient {
     }
 
     @NSManaged public var details: String?
+    @NSManaged public var isPresent: Bool
     @NSManaged public var recipe: Recipe?
 
 }
