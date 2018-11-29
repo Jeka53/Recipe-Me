@@ -415,7 +415,7 @@
             </objects>
             <point key="canvasLocation" x="3476" y="-1576"/>
         </scene>
-        <!--3. Add ingridients-->
+        <!--3. Add ingredients-->
         <scene sceneID="ho5-GV-Uoe">
             <objects>
                 <viewController id="w7t-he-yBD" customClass="CreateIngredientsViewController" customModule="Recipe_Me" customModuleProvider="target" sceneMemberID="viewController">
@@ -437,15 +437,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="spF-fV-3Ly"/>
                     </view>
-                    <navigationItem key="navigationItem" title="3. Add ingridients" id="g0V-31-7Mg">
+                    <navigationItem key="navigationItem" title="3. Add ingredients" id="g0V-31-7Mg">
                         <barButtonItem key="rightBarButtonItem" enabled="NO" title="Next" id="cZP-kD-mMe">
                             <connections>
-                                <action selector="createIngredients:" destination="w7t-he-yBD" id="2kS-6C-UEu"/>
+                                <action selector="createIngredients:" destination="w7t-he-yBD" id="8N5-hu-SjT"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="nextBarButtonItem" destination="cZP-kD-mMe" id="Hre-gU-7s8"/>
+                        <outlet property="nextBarButtonItem" destination="cZP-kD-mMe" id="LM8-Q1-gQc"/>
                         <outlet property="tableView" destination="wXB-W5-6YW" id="3Bd-P7-xfX"/>
                         <segue destination="RLU-hb-vZD" kind="show" identifier="toCreateStepsViewController" id="7Nq-8s-Vjk"/>
                     </connections>

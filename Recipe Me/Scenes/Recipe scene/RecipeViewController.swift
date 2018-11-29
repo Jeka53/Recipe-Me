@@ -16,7 +16,7 @@ class RecipeViewController: UIViewController {
   // Cell identifiers
   let titlePhotoCell = "TitlePhotoCell"
   let stepCell = "StepCell"
-  let ingridientsCell = "IngredientsCell"
+  let ingredientsCell = "IngredientsCell"
   
   weak var managedContext = TabBarController.managedContext
   var fetchResultsController: NSFetchedResultsController<Recipe>!
@@ -41,11 +41,11 @@ class RecipeViewController: UIViewController {
     }
   }
   
-  // refresh all ingridients
+  // refresh all ingredients
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if motion == .motionShake {
-      for ingridient in fetchResultsController.fetchedObjects?.first!.ingridients?.array as! [Ingredient] {
-        ingridient.isPresent = false
+      for ingredient in fetchResultsController.fetchedObjects?.first!.ingredients?.array as! [Ingredient] {
+        ingredient.isPresent = false
       }
       
       let tableViewCell = tableView.cellForRow(at: IndexPath(row: 0, section: 1))
@@ -140,8 +140,8 @@ extension RecipeViewController: UITableViewDataSource {
       cell.recipeDescriptionLabel.text = recipe.details
       return cell
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: ingridientsCell, for: indexPath) as! IngredientsTableViewCell
-      cell.ingridients = (recipe.ingridients?.array as! [Ingredient])
+      let cell = tableView.dequeueReusableCell(withIdentifier: ingredientsCell, for: indexPath) as! IngredientsTableViewCell
+      cell.ingredients = (recipe.ingredients?.array as! [Ingredient])
       return cell
     case 2:
       let cell = tableView.dequeueReusableCell(withIdentifier: stepCell, for: indexPath) as! StepTableViewCell

@@ -10,19 +10,19 @@ import UIKit
 
 class IngredientsTableView: UITableView {
   
-  var ingridients: [String] = [] {
+  var ingredients: [String] = [] {
     didSet {
       // do not reload table view when textView value changed
-      if oldValue.count != ingridients.count {
+      if oldValue.count != ingredients.count {
         reloadData()
-        tableViewReloadedCallback?(ingridients)
+        tableViewReloadedCallback?(ingredients)
       }
     }
   }
   
   var tableViewReloadedCallback: (([String]) -> Void)?
   
-  let ingridientCellIdentifier = "IngredientCell"
+  let ingredientCellIdentifier = "IngredientCell"
   let newIngredientCellIdentifier = "NewIngredientCell"
   
   var selectedIndexPath: IndexPath!
@@ -30,7 +30,7 @@ class IngredientsTableView: UITableView {
   override func awakeFromNib() {
     super.awakeFromNib()
     
-    self.register(UINib(nibName: "IngredientTableViewCell", bundle: nil), forCellReuseIdentifier: ingridientCellIdentifier)
+    self.register(UINib(nibName: "IngredientTableViewCell", bundle: nil), forCellReuseIdentifier: ingredientCellIdentifier)
     self.register(UINib(nibName: "NewIngredientTableViewCell", bundle: nil), forCellReuseIdentifier: newIngredientCellIdentifier)
     
     dataSource = self
@@ -55,7 +55,7 @@ extension IngredientsTableView: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
     if section == 0 {
-      return ingridients.count
+      return ingredients.count
     }
     
     if section == 1 {
@@ -67,12 +67,12 @@ extension IngredientsTableView: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      let cell = tableView.dequeueReusableCell(withIdentifier: ingridientCellIdentifier, for: indexPath) as! IngredientTableViewCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: ingredientCellIdentifier, for: indexPath) as! IngredientTableViewCell
       cell.textField.delegate = self
-      cell.textField.text = ingridients[indexPath.row]
+      cell.textField.text = ingredients[indexPath.row]
       cell.deleteCellCallback = { [weak self] cell in
         if let indexPath = tableView.indexPath(for: cell) {
-          self?.ingridients.remove(at: indexPath.row)
+          self?.ingredients.remove(at: indexPath.row)
         }
       }
       return cell
@@ -103,9 +103,9 @@ extension IngredientsTableView: UITableViewDelegate {
     if indexPath.section == 0 {
       let cell = tableView.cellForRow(at: indexPath) as! IngredientTableViewCell
       if cell.textField.text! == "" {
-        ingridients.remove(at: indexPath.row)
+        ingredients.remove(at: indexPath.row)
       } else {
-        self.ingridients[indexPath.row] = cell.textField.text!
+        self.ingredients[indexPath.row] = cell.textField.text!
       }
       return
     }
@@ -131,9 +131,9 @@ extension IngredientsTableView: UITextFieldDelegate {
     if selectedIndexPath.section == 0 {
       // existing cell is not empty
       guard textField.text == "" else {
-        ingridients[selectedIndexPath.row] = textField.text!
+        ingredients[selectedIndexPath.row] = textField.text!
         self.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .none)
-        if selectedIndexPath.row == ingridients.count - 1 {
+        if selectedIndexPath.row == ingredients.count - 1 {
           selectCell(indexPath: IndexPath(row: 0, section: 1))
         } else {
           selectCell(indexPath: IndexPath(row: selectedIndexPath.row + 1, section: 0))
@@ -141,7 +141,7 @@ extension IngredientsTableView: UITextFieldDelegate {
         return true
       }
       // existing cell is empty
-      ingridients.remove(at: selectedIndexPath.row)
+      ingredients.remove(at: selectedIndexPath.row)
       return true
     }
     
@@ -179,7 +179,7 @@ extension IngredientsTableView {
       return
     }
     
-    ingridients.append(textField.text!)
+    ingredients.append(textField.text!)
     textField.text! = ""
   }
 }

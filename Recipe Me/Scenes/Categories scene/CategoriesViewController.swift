@@ -111,8 +111,14 @@ extension CategoriesViewController: UICollectionViewDataSource {
     
     cell.categoryNameLabel.text = category.name
     
-    //TODO: plural forms
-    cell.categoryCountLabel.text = String(category.numberOfRecipes) + " recipes"
+    //TODO: localize this
+    switch category.numberOfRecipes {
+    case 1:
+      cell.categoryCountLabel.text = String(category.numberOfRecipes) + " recipe"
+    default:
+      cell.categoryCountLabel.text = String(category.numberOfRecipes) + " recipes"
+    }
+
     return cell
   }
 }

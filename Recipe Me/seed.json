@@ -8,7 +8,7 @@
     "time": 15,
     "details": "One of the secrets is you need to use a lot of dressing for this salad. Spread dressing in time steps. Cheese should be piquant.",
     "image": "titleImage",
-    "ingridients": [
+    "ingredients": [
       {
         "details": "1.5 medium chicory salads",
         "isPresent": false

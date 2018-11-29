@@ -11,7 +11,7 @@ import UIKit
 class IngredientsTableViewCell: UITableViewCell {
   
   var tableView: AutoHeightTableView!
-  var ingridients: [Ingredient]!
+  var ingredients: [Ingredient]!
   
   // will be never called
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -56,9 +56,9 @@ extension IngredientsTableViewCell: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    guard ingridients != nil else { return 0 }
+    guard ingredients != nil else { return 0 }
     
-    return ingridients.count 
+    return ingredients.count 
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -66,14 +66,14 @@ extension IngredientsTableViewCell: UITableViewDataSource {
     let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
     
     // text appearance
-    if ingridients[indexPath.row].isPresent {
-      let attributedString = NSAttributedString(string: ingridients[indexPath.row].details!,
+    if ingredients[indexPath.row].isPresent {
+      let attributedString = NSAttributedString(string: ingredients[indexPath.row].details!,
                                                 attributes: [NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue])
       cell.textLabel?.attributedText = attributedString
       cell.textLabel?.textColor = .gray
     } else {
       cell.textLabel?.attributedText = nil
-      cell.textLabel?.text = ingridients[indexPath.row].details
+      cell.textLabel?.text = ingredients[indexPath.row].details
       cell.textLabel?.textColor = UIColor(white: 0.15, alpha: 1)
     }
     cell.textLabel?.font = UIFont.italicSystemFont(ofSize: 17)
@@ -99,17 +99,17 @@ extension IngredientsTableViewCell: UITableViewDelegate {
     
     let cell = tableView.cellForRow(at: indexPath)
     
-    if ingridients[indexPath.row].isPresent == false {
-      let attributedString = NSAttributedString(string: ingridients[indexPath.row].details!,
+    if ingredients[indexPath.row].isPresent == false {
+      let attributedString = NSAttributedString(string: ingredients[indexPath.row].details!,
                                                 attributes: [NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue])
       cell?.textLabel?.attributedText = attributedString
       cell?.textLabel?.textColor = .gray
-      ingridients[indexPath.row].isPresent = true
-    } else if ingridients[indexPath.row].isPresent {
+      ingredients[indexPath.row].isPresent = true
+    } else if ingredients[indexPath.row].isPresent {
       cell?.textLabel?.attributedText = nil
-      cell?.textLabel?.text = ingridients[indexPath.row].details
+      cell?.textLabel?.text = ingredients[indexPath.row].details
       cell?.textLabel?.textColor = UIColor(white: 0.15, alpha: 1)
-      ingridients[indexPath.row].isPresent = false
+      ingredients[indexPath.row].isPresent = false
     }
   }
 }

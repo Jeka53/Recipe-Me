@@ -13,12 +13,12 @@ class CreateIngredientsViewController: UIViewController {
   
   @IBAction func createIngredients(_ sender: UIBarButtonItem) {
     guard let recipe = self.recipe else { return }
-    recipe.ingridients = []
-    tableView.ingridients.forEach { ingridientString in
-      let ingridient = Ingredient(context: managedContext!)
-      ingridient.details = ingridientString
-      ingridient.isPresent = false
-      recipe.addToIngredients(ingridient)
+    recipe.ingredients = []
+    tableView.ingredients.forEach { ingredientString in
+      let ingredient = Ingredient(context: managedContext!)
+      ingredient.details = ingredientString
+      ingredient.isPresent = false
+      recipe.addToIngredients(ingredient)
     }
     
     do {
@@ -32,8 +32,8 @@ class CreateIngredientsViewController: UIViewController {
   
   @IBOutlet weak var tableView: IngredientsTableView! {
     didSet {
-      tableView.tableViewReloadedCallback = { [weak self] ingridients in
-        self?.nextBarButtonItem.isEnabled = ingridients.count > 1
+      tableView.tableViewReloadedCallback = { [weak self] ingredients in
+        self?.nextBarButtonItem.isEnabled = ingredients.count > 1
       }
     }
   }
@@ -43,7 +43,7 @@ class CreateIngredientsViewController: UIViewController {
   weak var managedContext = TabBarController.managedContext
   
   var recipeTitle: String!
-  var ingridients: [Ingredient] = []
+  var ingredients: [Ingredient] = []
   var recipe: Recipe!
   let segueIdentifier = "toCreateStepsViewController"
   
@@ -74,11 +74,11 @@ class CreateIngredientsViewController: UIViewController {
     
     do {
       let recipes = try managedContext?.fetch(fetchRequest)
-      guard let recipe = recipes?.first, let nsIngredients = recipe.ingridients else {return}
+      guard let recipe = recipes?.first, let nsIngredients = recipe.ingredients else {return}
       self.recipe = recipe
       if nsIngredients.count > 0 {
-        ingridients = nsIngredients.array as! [Ingredient]
-        tableView.ingridients =  ingridients.map{$0.details!}
+        ingredients = nsIngredients.array as! [Ingredient]
+        tableView.ingredients =  ingredients.map{$0.details!}
       }
     } catch {
       print(error.localizedDescription)

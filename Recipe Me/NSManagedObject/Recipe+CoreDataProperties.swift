@@ -22,12 +22,12 @@ extension Recipe {
     @NSManaged public var details: String?
     @NSManaged public var image: NSData?
     @NSManaged public var category: Category?
-    @NSManaged public var ingridients: NSOrderedSet?
+    @NSManaged public var ingredients: NSOrderedSet?
     @NSManaged public var steps: NSOrderedSet?
 
 }
 
-// MARK: Generated accessors for ingridients
+// MARK: Generated accessors for ingredients
 extension Recipe {
 
     @objc(insertObject:inIngredientsAtIndex:)
