@@ -18,5 +18,11 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     imageView.image = nil
     titleLabel.text = nil
+    
+    // appearance
+    layer.cornerRadius = 6
+    layer.borderWidth = 0.5
+    layer.borderColor = UIColor.lightGray.cgColor
+    clipsToBounds = true
   }
 }

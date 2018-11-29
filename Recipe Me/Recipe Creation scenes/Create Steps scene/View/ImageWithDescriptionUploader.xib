@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateStepsViewController" customModule="Recipe_Me" customModuleProvider="target">
+            <connections>
+                <outlet property="imageWithDescriptionUploader" destination="rKB-zb-W6v" id="KdX-s7-E1A"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="736"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xwa-Wh-YuE">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="736"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bWX-y1-NY3" userLabel="ContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="602"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-Ls-8we">
+                                    <rect key="frame" x="0.0" y="20" width="375" height="562"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add picture and description to create a step for recipe" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwz-J4-hCk">
+                                            <rect key="frame" x="37.5" y="0.0" width="300" height="38.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VGg-qX-m49" customClass="CreateStepCollectionView" customModule="Recipe_Me" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="58.5" width="375" height="88.5"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5FO-6t-uE3">
+                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells/>
+                                        </collectionView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cameraIcon" translatesAutoresizingMaskIntoConstraints="NO" id="J6P-Du-HpP">
+                                            <rect key="frame" x="37.5" y="167" width="300" height="225"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="J6P-Du-HpP" secondAttribute="height" multiplier="1.333:1" id="Ea0-ab-fgj"/>
+                                            </constraints>
+                                        </imageView>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hbd-PQ-0Pp" customClass="UITextViewWithPlaceholder" customModule="Recipe_Me" customModuleProvider="target">
+                                            <rect key="frame" x="37.5" y="412" width="300" height="150"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="150" id="MRP-Jd-Lpi"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="0.40000000000000002"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="withPlaceholder" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Enter step description here"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="placeholderTextColor">
+                                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </textView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Fwz-J4-hCk" firstAttribute="width" secondItem="hbd-PQ-0Pp" secondAttribute="width" id="Us5-AA-Nf0"/>
+                                        <constraint firstItem="VGg-qX-m49" firstAttribute="leading" secondItem="x9a-Ls-8we" secondAttribute="leading" id="efD-Pb-iiE"/>
+                                        <constraint firstAttribute="trailing" secondItem="VGg-qX-m49" secondAttribute="trailing" id="fET-xG-XKg"/>
+                                        <constraint firstItem="Fwz-J4-hCk" firstAttribute="width" secondItem="x9a-Ls-8we" secondAttribute="width" multiplier="0.8" id="pAk-Hg-SNh"/>
+                                        <constraint firstItem="J6P-Du-HpP" firstAttribute="width" secondItem="hbd-PQ-0Pp" secondAttribute="width" id="wm7-Ma-pIN"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="x9a-Ls-8we" secondAttribute="trailing" id="cWH-9M-5FR"/>
+                                <constraint firstItem="x9a-Ls-8we" firstAttribute="top" secondItem="bWX-y1-NY3" secondAttribute="top" constant="20" id="n7f-Tx-uV7"/>
+                                <constraint firstItem="x9a-Ls-8we" firstAttribute="leading" secondItem="bWX-y1-NY3" secondAttribute="leading" id="ny3-zU-qjP"/>
+                                <constraint firstAttribute="bottom" secondItem="x9a-Ls-8we" secondAttribute="bottom" constant="20" id="oy0-Ze-0kI"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="bWX-y1-NY3" firstAttribute="top" secondItem="Xwa-Wh-YuE" secondAttribute="top" id="3eu-UT-Tew"/>
+                        <constraint firstAttribute="bottom" secondItem="bWX-y1-NY3" secondAttribute="bottom" id="ESt-67-IIR"/>
+                        <constraint firstItem="bWX-y1-NY3" firstAttribute="leading" secondItem="Xwa-Wh-YuE" secondAttribute="leading" id="hEx-al-4Z0"/>
+                        <constraint firstItem="bWX-y1-NY3" firstAttribute="width" secondItem="Xwa-Wh-YuE" secondAttribute="width" id="hxm-aT-jYd"/>
+                        <constraint firstAttribute="trailing" secondItem="bWX-y1-NY3" secondAttribute="trailing" id="ocO-to-24K"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Xwa-Wh-YuE" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="F5v-Hm-xci"/>
+                <constraint firstItem="Xwa-Wh-YuE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="QOh-0m-bRc"/>
+                <constraint firstAttribute="trailing" secondItem="Xwa-Wh-YuE" secondAttribute="trailing" id="TGE-GW-5kb"/>
+                <constraint firstItem="VGg-qX-m49" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.12" id="Zq1-Mg-ZwQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Xwa-Wh-YuE" secondAttribute="bottom" id="hrA-Sj-VCr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="53.600000000000001" y="-422.78860569715147"/>
+        </view>
+        <customObject id="rKB-zb-W6v" customClass="ImageWithDescriptionUploader" customModule="Recipe_Me" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="VGg-qX-m49" id="k4q-Zl-8eK"/>
+                <outlet property="imageView" destination="J6P-Du-HpP" id="xQa-hd-eWL"/>
+                <outlet property="scrollView" destination="Xwa-Wh-YuE" id="F1I-EC-hC2"/>
+                <outlet property="textView" destination="hbd-PQ-0Pp" id="SYZ-8c-SBe"/>
+            </connections>
+        </customObject>
+    </objects>
+    <resources>
+        <image name="cameraIcon" width="100" height="101"/>
+    </resources>
+</document>

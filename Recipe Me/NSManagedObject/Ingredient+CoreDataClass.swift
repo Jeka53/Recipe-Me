@@ -1,5 +1,5 @@
 //
-//  Ingridient+CoreDataClass.swift
+//  Ingredient+CoreDataClass.swift
 //  Recipe Me
 //
 //  Created by Jora on 10/18/18.
@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-@objc(Ingridient)
-public class Ingridient: NSManagedObject {
+@objc(Ingredient)
+public class Ingredient: NSManagedObject {
 
 }

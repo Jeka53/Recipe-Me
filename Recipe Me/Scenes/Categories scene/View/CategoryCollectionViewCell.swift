@@ -22,5 +22,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     imageView.image = nil
     categoryNameLabel.text = nil
     categoryCountLabel.text = nil
+    
+    // appearance
+    layer.cornerRadius = 6
+    layer.borderWidth = 0.5
+    layer.borderColor = UIColor.lightGray.cgColor
+    clipsToBounds = true
   }
 }

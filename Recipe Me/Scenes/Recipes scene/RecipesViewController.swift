@@ -21,6 +21,14 @@ class RecipesViewController: UIViewController {
   var category: String!
   var fetchResultsController: NSFetchedResultsController<Recipe>!
   weak var managedContext = TabBarController.managedContext
+  var imagesCache = [UIImage?]()
+  
+  var cellSize: CGFloat? {
+    didSet {
+      self.imagesCache = self.imagesCache.map{$0?.renderResizedImage(newWidth: cellSize!)}
+      collectionView.reloadData()
+    }
+  }
   
   lazy var selectedCategoryRecipesPredicate = NSPredicate(format: "%K = %@", #keyPath(Recipe.category.name), category)
   lazy var sortDescriptor = NSSortDescriptor(key: #keyPath(Recipe.title), ascending: true)
@@ -30,7 +38,9 @@ class RecipesViewController: UIViewController {
     
     self.title = category
     
-    fetchSelectedCatagoryRecipes()
+    DispatchQueue.main.async {
+      self.fetchSelectedCatagoryRecipes()
+    }
   }
   
   deinit {
@@ -38,6 +48,8 @@ class RecipesViewController: UIViewController {
   }
     
   func fetchSelectedCatagoryRecipes() {
+    imagesCache = []
+    
     let fetchRequest: NSFetchRequest<Recipe> = Recipe.fetchRequest()
     fetchRequest.predicate = selectedCategoryRecipesPredicate
     fetchRequest.sortDescriptors = [sortDescriptor]
@@ -48,6 +60,25 @@ class RecipesViewController: UIViewController {
     
     do {
       try fetchResultsController.performFetch()
+      let recipes = fetchResultsController.fetchedObjects
+      if let recipes = recipes {
+        recipes.forEach { recipe in
+          if let imageData = recipe.image as Data? {
+            imagesCache.append(UIImage(data: imageData))
+          } else {
+            imagesCache.append(UIImage(named: "cameraIcon"))
+          }
+        }
+      }
+      // cellSize is not set by sizeForItemAt when you dissmiss to self
+      if cellSize != nil {
+        self.imagesCache = self.imagesCache.map{$0?.renderResizedImage(newWidth: cellSize!)}
+      }
+      UIView.transition(with: collectionView,
+                        duration: 0.2,
+                        options: .transitionCrossDissolve,
+                        animations: { self.collectionView.reloadData() }
+      )
     } catch {
       print(error.localizedDescription)
     }
@@ -68,16 +99,14 @@ class RecipesViewController: UIViewController {
 // MARK: - UICollectionViewDataSource
 extension RecipesViewController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    guard fetchResultsController != nil else { return 0 }
     return fetchResultsController.fetchedObjects?.count ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recipeCellIdentifier, for: indexPath) as! RecipeCollectionViewCell
     let recipe = fetchResultsController.object(at: indexPath)
-    let imageData = recipe.image as Data?
-    if let imageData = imageData {
-      cell.imageView.image = UIImage(data: imageData)
-    }
+    cell.imageView.image = imagesCache[indexPath.row]
     cell.titleLabel.text = recipe.title
     return cell
   }
@@ -93,6 +122,9 @@ extension RecipesViewController: UICollectionViewDelegateFlowLayout {
       + flowLayout.sectionInset.right
       + (flowLayout.minimumInteritemSpacing * CGFloat(numbersOfItemsInRow - 1))
     let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numbersOfItemsInRow))
+    if cellSize == nil {
+      cellSize = CGFloat(size)
+    }
     return CGSize(width: size, height: size)
   }
 }

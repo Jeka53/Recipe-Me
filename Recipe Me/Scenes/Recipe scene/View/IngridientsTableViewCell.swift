@@ -1,5 +1,5 @@
 //
-//  IngridientsTableViewCell.swift
+//  IngredientsTableViewCell.swift
 //  Recipe Me
 //
 //  Created by Jora on 10/24/18.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-class IngridientsTableViewCell: UITableViewCell {
+class IngredientsTableViewCell: UITableViewCell {
   
   var tableView: AutoHeightTableView!
-  var ingridients: [Ingridient]!
+  var ingridients: [Ingredient]!
   
   // will be never called
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -52,7 +52,7 @@ class IngridientsTableViewCell: UITableViewCell {
 }
 
 // MARK: - UITableViewDataSource
-extension IngridientsTableViewCell: UITableViewDataSource {
+extension IngredientsTableViewCell: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
@@ -86,14 +86,14 @@ extension IngridientsTableViewCell: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return "Ingridients:"
+    return "Ingredients:"
   }
 }
 
 
 
 // MARK: - UITableViewDelegate
-extension IngridientsTableViewCell: UITableViewDelegate {
+extension IngredientsTableViewCell: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     

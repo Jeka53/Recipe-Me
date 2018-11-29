@@ -71,10 +71,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let ingridientsArray = recipeDict["ingridients"] as! [[String: Any]]
     
     for ingridientDict in ingridientsArray {
-      let ingridient = Ingridient(context: persistentContainer.viewContext)
+      let ingridient = Ingredient(context: persistentContainer.viewContext)
       ingridient.details = ingridientDict["details"] as? String
       ingridient.isPresent = ingridientDict["isPresent"] as! Bool
-      recipe.addToIngridients(ingridient)
+      recipe.addToIngredients(ingridient)
     }
     
     let stepsArray = recipeDict["steps"] as! [[String: String]]

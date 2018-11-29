@@ -19,6 +19,15 @@ class CategoriesViewController: UIViewController {
   
   var fetchResultsController: NSFetchedResultsController<Category>!
   var managedContext: NSManagedObjectContext!
+  var imagesCache = [UIImage?]()
+  
+  // resize cell image to fit imageView size
+  var cellSize: CGFloat? {
+    didSet {
+      self.imagesCache = self.imagesCache.map{$0?.renderResizedImage(newWidth: cellSize!)}
+      collectionView.reloadData()
+    }
+  }
   
   
   // MARK: - Lifecycle
@@ -26,19 +35,55 @@ class CategoriesViewController: UIViewController {
       super.viewDidLoad()
       
       managedContext = TabBarController.managedContext
-      
-      let fetchRequest:NSFetchRequest<Category> = Category.fetchRequest()
-      let sortDescriptor = NSSortDescriptor(key: #keyPath(Category.name), ascending: true)
-      fetchRequest.sortDescriptors = [sortDescriptor]
-      
-      fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
-      do {
-        try fetchResultsController.performFetch()
-      } catch {
-        print("\(error.localizedDescription)")
-      }
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    DispatchQueue.main.async {
+      self.fetchCategories()
+    }
+  }
+  
+  // MARK: - Methods
+  func fetchCategories() {
+    imagesCache = []
+    
+    let fetchRequest:NSFetchRequest<Category> = Category.fetchRequest()
+    let sortDescriptor = NSSortDescriptor(key: #keyPath(Category.name), ascending: true)
+    fetchRequest.sortDescriptors = [sortDescriptor]
+    
+    fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: managedContext, sectionNameKeyPath: nil, cacheName: nil)
+    do {
+      try fetchResultsController.performFetch()
+      // resize and cache images
+      let categories = fetchResultsController.fetchedObjects
+      if let categories = categories {
+        categories.forEach { category in
+          if let recipe = category.recipes?.firstObject as! Recipe? {
+            if let imageData = recipe.image as Data? {
+              imagesCache.append(UIImage(data: imageData))
+            } else {
+              imagesCache.append(UIImage(named: "cameraIcon"))
+            }
+          } else {
+            imagesCache.append(UIImage(named: "cameraIcon"))
+          }
+        }
+      }
+      // cellSize is not set by sizeForItemAt when you dissmiss to self
+      if cellSize != nil {
+        self.imagesCache = self.imagesCache.map{$0?.renderResizedImage(newWidth: cellSize!)}
+      }
+      UIView.transition(with: collectionView,
+                        duration: 0.2,
+                        options: .transitionCrossDissolve,
+                        animations: { self.collectionView.reloadData() }
+      )
+    } catch {
+      print("\(error.localizedDescription)")
+    }
+  }
   
   // MARK: - Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -52,18 +97,21 @@ class CategoriesViewController: UIViewController {
 
 // MARK: - UICollectionViewDataSource
 extension CategoriesViewController: UICollectionViewDataSource {
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    guard fetchResultsController != nil else { return 0 }
     return fetchResultsController.fetchedObjects?.count ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellIdentifier, for: indexPath) as! CategoryCollectionViewCell
     let category = fetchResultsController.object(at: indexPath)
-    let imageData = (category.recipes?.firstObject as! Recipe).image as Data?
-    if let imageData = imageData {
-      cell.imageView.image = UIImage(data: imageData)
-    }
+    
+    cell.imageView.image = imagesCache[indexPath.row]
+    
     cell.categoryNameLabel.text = category.name
+    
+    //TODO: plural forms
     cell.categoryCountLabel.text = String(category.numberOfRecipes) + " recipes"
     return cell
   }
@@ -79,6 +127,9 @@ extension CategoriesViewController: UICollectionViewDelegateFlowLayout {
       + flowLayout.sectionInset.right
       + (flowLayout.minimumInteritemSpacing * CGFloat(numbersOfItemsInRow - 1))
     let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(numbersOfItemsInRow))
+    if cellSize == nil {
+      cellSize = CGFloat(size)
+    }
     return CGSize(width: size, height: size)
   }
 }

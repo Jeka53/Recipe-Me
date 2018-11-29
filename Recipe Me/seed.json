@@ -1,7 +1,7 @@
 {
   "recipe": {
     "category": {
-      "name": "Sample Category",
+      "name": "Salads",
       "numberOfRecipes": 1
     },
     "title": "Chicory salad with apples",
@@ -31,7 +31,7 @@
       },
       {
       "details": "1 tbs of mustard",
-      "isPresent": true
+      "isPresent": false
       },
       {
       "details": "1 tsp of agave syrup",

@@ -1,5 +1,5 @@
 //
-//  Ingridient+CoreDataProperties.swift
+//  Ingredient+CoreDataProperties.swift
 //  Recipe Me
 //
 //  Created by Jora on 10/24/18.
@@ -11,10 +11,10 @@ import Foundation
 import CoreData
 
 
-extension Ingridient {
+extension Ingredient {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Ingridient> {
-        return NSFetchRequest<Ingridient>(entityName: "Ingridient")
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<Ingredient> {
+        return NSFetchRequest<Ingredient>(entityName: "Ingredient")
     }
 
     @NSManaged public var details: String?

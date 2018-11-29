@@ -30,35 +30,35 @@ extension Recipe {
 // MARK: Generated accessors for ingridients
 extension Recipe {
 
-    @objc(insertObject:inIngridientsAtIndex:)
-    @NSManaged public func insertIntoIngridients(_ value: Ingridient, at idx: Int)
+    @objc(insertObject:inIngredientsAtIndex:)
+    @NSManaged public func insertIntoIngredients(_ value: Ingredient, at idx: Int)
 
-    @objc(removeObjectFromIngridientsAtIndex:)
-    @NSManaged public func removeFromIngridients(at idx: Int)
+    @objc(removeObjectFromIngredientsAtIndex:)
+    @NSManaged public func removeFromIngredients(at idx: Int)
 
-    @objc(insertIngridients:atIndexes:)
-    @NSManaged public func insertIntoIngridients(_ values: [Ingridient], at indexes: NSIndexSet)
+    @objc(insertIngredients:atIndexes:)
+    @NSManaged public func insertIntoIngredients(_ values: [Ingredient], at indexes: NSIndexSet)
 
-    @objc(removeIngridientsAtIndexes:)
-    @NSManaged public func removeFromIngridients(at indexes: NSIndexSet)
+    @objc(removeIngredientsAtIndexes:)
+    @NSManaged public func removeFromIngredients(at indexes: NSIndexSet)
 
-    @objc(replaceObjectInIngridientsAtIndex:withObject:)
-    @NSManaged public func replaceIngridients(at idx: Int, with value: Ingridient)
+    @objc(replaceObjectInIngredientsAtIndex:withObject:)
+    @NSManaged public func replaceIngredients(at idx: Int, with value: Ingredient)
 
-    @objc(replaceIngridientsAtIndexes:withIngridients:)
-    @NSManaged public func replaceIngridients(at indexes: NSIndexSet, with values: [Ingridient])
+    @objc(replaceIngredientsAtIndexes:withIngredients:)
+    @NSManaged public func replaceIngredients(at indexes: NSIndexSet, with values: [Ingredient])
 
-    @objc(addIngridientsObject:)
-    @NSManaged public func addToIngridients(_ value: Ingridient)
+    @objc(addIngredientsObject:)
+    @NSManaged public func addToIngredients(_ value: Ingredient)
 
-    @objc(removeIngridientsObject:)
-    @NSManaged public func removeFromIngridients(_ value: Ingridient)
+    @objc(removeIngredientsObject:)
+    @NSManaged public func removeFromIngredients(_ value: Ingredient)
 
-    @objc(addIngridients:)
-    @NSManaged public func addToIngridients(_ values: NSOrderedSet)
+    @objc(addIngredients:)
+    @NSManaged public func addToIngredients(_ values: NSOrderedSet)
 
-    @objc(removeIngridients:)
-    @NSManaged public func removeFromIngridients(_ values: NSOrderedSet)
+    @objc(removeIngredients:)
+    @NSManaged public func removeFromIngredients(_ values: NSOrderedSet)
 
 }
 
